@@ -23,9 +23,11 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) # auto_now_add vai gerar exatamente a data e o horário quando o usuário enviar a receita para o sistema
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
+    cover = models.ImageField(
+        upload_to='recipes/covers/%Y/%m/%d/', blank=True, default=''
+    )
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True
+        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None
     )
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
